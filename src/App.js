@@ -20,28 +20,45 @@ function App() {
     console.log("hello")
   }, [])
 
+  const addItem = async () => {
+
+    const newItem = {
+      "name": "Jauheliha 400g",
+      "price": 2.20,
+      "picture": "https://cdn.s-cloud.fi/v1/h480w320/product/ean/6414893500044_kuva1.jpg"
+    }
+
+    const result = await fetch('http://localhost:3001/api/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newItem)
+    })
+
+    const resultInJson = await result.json()
+    console.log(resultInJson)
+  }
 
   return (
     <div>
       <h1>EzItems REST API</h1>
-      <form>
+      <form onSubmit={addItem}>
+        <h3>Add Item</h3>
         <div>
           <label>Item name</label>
-          <input type="text"></input>
+          <input name="name" type="text"></input>
         </div>
         <div>
           <label>Price</label>
-          <input type="text"></input>
+          <input name="price" type="text"></input>
         </div>
         <div>
           <label>Picture</label>
-          <input type="text"></input>
+          <input name="picture" type="text"></input>
         </div>
         <div>
-          <input name="Find" type="submit" value="Find"></input>
           <input name="Add" type="submit" value="Add"></input>
-          <input name="Update" type="submit" value="Update"></input>
-          <input name="Delete" type="submit" value="Delete"></input>
         </div>
       </form>
       <div>
