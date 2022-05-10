@@ -6,9 +6,9 @@ function App() {
 
   const [items, setItems] = useState([])
 
+  // List of items updated each render
   useEffect(() => {
 
-    // Default state of items
     const fetchItems = async () => {
       const result = await fetch('http://localhost:3001/api/getall')
       const jsonResult = await result.json()
@@ -20,6 +20,7 @@ function App() {
     console.log("hello")
   }, [])
 
+  // Add new item
   const addItem = async () => {
 
     const newItem = {
@@ -40,8 +41,22 @@ function App() {
     console.log(resultInJson)
   }
 
+  // Delete item using ID
+  const deleteItem = async (id) =>   {
+
+    const result = await fetch('http://localhost:3001/api/delete/' + id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    const resultInJson = await result.json()
+    console.log(resultInJson)
+  }
+
   return (
-    <div>
+    <div >
       <h1>EzItems REST API</h1>
       <form onSubmit={addItem}>
         <h3>Add Item</h3>
@@ -54,7 +69,7 @@ function App() {
           <input name="price" type="text"></input>
         </div>
         <div>
-          <label>Picture</label>
+          <label>Picture (URL)</label>
           <input name="picture" type="text"></input>
         </div>
         <div>
@@ -62,12 +77,13 @@ function App() {
         </div>
       </form>
       <div>
-        <h2>Items:</h2>
+        <h2>Items</h2>
         {items.map(item =>
-          <div key={item._id}>
+          <div key={item._id} id="itemsDiv">
             <img src={item.picture}></img>
             <h3>{item.name}</h3>
             <h3>{item.price} €</h3>
+            <button onClick={e => deleteItem(item._id)} id="deleteBtn">Delete</button>
           </div>)}
       </div>
     </div>
