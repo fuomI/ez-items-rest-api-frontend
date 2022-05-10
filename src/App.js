@@ -1,5 +1,5 @@
-// Import React and hooks: useState, useEffect
-import React, { useState, useEffect } from 'react';
+// Import React and hooks: useState, useEffect, useRef
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 function App() {
@@ -19,17 +19,12 @@ function App() {
   const [updatedPrice, setUpdatedPrice] = useState('')
   const [updatedPicture, setUpdatedPicture] = useState('')
 
-  // Same thing but for searched items
-  const [searched, setSearched] = useState('')
-
-  // Popup state
-  const [buttonPopup, setButtonPopup] = useState(false)
-
   // Get all items
   const fetchItems = async () => {
     const result = await fetch('http://localhost:3001/api/getall')
     const jsonResult = await result.json()
 
+    // Change the useState of items
     setItems(jsonResult)
   }
 
@@ -107,11 +102,6 @@ function App() {
     fetchItems()
   }
 
-  // Search item and focus it
-  const searchHelp = async () => {
-
-  }
-
   return (
     <div>
       <div>
@@ -129,10 +119,7 @@ function App() {
       </div>
       <div>
         <h2>Help</h2>
-        <form onSubmit={searchHelp}>
-          <input value={searched} name="searched" type="text" onChange={e => setSearched(e.target.value)}></input>
-          <input id="searchBtn" name="Search" type="submit" value="Search"></input>
-        </form>
+        <input type="text" placeholder="Search help..."></input>
       </div>
       <div>
         <h2>Items</h2>
