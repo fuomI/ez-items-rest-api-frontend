@@ -1,0 +1,8 @@
+img {
+    width: 70px;
+    height: 70px;
+}
+
+#itemsDiv {
+    display: inline-block;
+}
