@@ -9,10 +9,15 @@ function App() {
   const [items, setItems] = useState([])
 
   // Empty by default: When appropriate inputs' values are changed
-  // setName, setPrice, setPicture are called
+  // setName, setPrice, setPicture are called when adding item
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [picture, setPicture] = useState('')
+
+  // setUpdatedName, setUpdatedPrice, setUpdatedPicture are called when updating item
+  const [updatedName, setUpdatedName] = useState('')
+  const [updatedPrice, setUpdatedPrice] = useState('')
+  const [updatedPicture, setUpdatedPicture] = useState('')
 
   // Same thing but for searched items
   const [searched, setSearched] = useState('')
@@ -77,13 +82,13 @@ function App() {
   }
 
   // Update item
-  const updateItem = async (prevName, prevPrice, prevPicture, id) => {
+  const updateItem = async (id) => {
 
     // newItem forms from input fields
     const updatedItem = {
-      "name": name,
-      "price": price,
-      "picture": picture
+      "name": updatedName,
+      "price": updatedPrice,
+      "picture": updatedPicture
     }
 
     // We use POST to add new item to database
@@ -134,11 +139,11 @@ function App() {
         <form>
           <h3>Update Item</h3>
           <label>Item name</label>
-          <input value={name} type="text" onChange={e => setName(e.target.value)}></input>
+          <input value={updatedName} type="text" onChange={e => setUpdatedName(e.target.value)}></input>
           <label>Price</label>
-          <input value={price} type="text" onChange={e => setPrice(e.target.value)}></input>
+          <input value={updatedPrice} type="text" onChange={e => setUpdatedPrice(e.target.value)}></input>
           <label>Picture (URL)</label>
-          <input value={picture} type="text" onChange={e => setPicture(e.target.value)}></input>
+          <input value={updatedPicture} type="text" onChange={e => setUpdatedPicture(e.target.value)}></input>
         </form>
         {items.map(item =>
           <div key={item._id} id="itemsDiv">
@@ -146,7 +151,7 @@ function App() {
             <h3>{item.name}</h3>
             <h3>{item.price} €</h3>
             <button onClick={e => deleteItem(item._id)} id="deleteBtn">Delete</button>
-            <button onClick={e => updateItem(item.name, item.price, item.picture, item._id)} id="updateBtn">Update</button>
+            <button onClick={e => updateItem(item._id)} id="updateBtn">Update</button>
           </div>)}
       </div>
       <div>
@@ -157,6 +162,7 @@ function App() {
           <p>The user can delete an item simply by clicking the red "Delete" -button attached to a item.</p>
           <h3>Updating item:</h3>
           <p>The user can update item by filling out "Update item" -form and then clicking "Update" -button attached to the item.</p>
+          <p>All fields must be updated to avoid empty fields. Previous data gets over written.</p>
           <h3>! WARNING !</h3>
           <p>All the changes are permanent and affect the database.</p>
       </div>
