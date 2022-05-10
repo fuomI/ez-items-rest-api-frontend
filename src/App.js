@@ -4,7 +4,15 @@ import './App.css';
 
 function App() {
 
+  // items hold all the items in JSON format
+  // useEffect calls setItems
   const [items, setItems] = useState([])
+
+  // Empty by default: When appropriate inputs' values are changed
+  // setName, setPrice, setPicture are called
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState('')
+  const [picture, setPicture] = useState('')
 
   // List of items updated each render
   useEffect(() => {
@@ -23,10 +31,11 @@ function App() {
   // Add new item
   const addItem = async () => {
 
+    // newItem forms from input fields
     const newItem = {
-      "name": "Jauheliha 400g",
-      "price": 2.20,
-      "picture": "https://cdn.s-cloud.fi/v1/h480w320/product/ean/6414893500044_kuva1.jpg"
+      "name": name,
+      "price": price,
+      "picture": picture
     }
 
     const result = await fetch('http://localhost:3001/api/add', {
@@ -44,6 +53,7 @@ function App() {
   // Delete item using ID
   const deleteItem = async (id) =>   {
 
+    // This time DELETE request
     const result = await fetch('http://localhost:3001/api/delete/' + id, {
       method: 'DELETE',
       headers: {
@@ -62,15 +72,15 @@ function App() {
         <h3>Add Item</h3>
         <div>
           <label>Item name</label>
-          <input name="name" type="text"></input>
+          <input value={name} name="name" type="text" onChange={e => setName(e.target.value)}></input>
         </div>
         <div>
           <label>Price</label>
-          <input name="price" type="text"></input>
+          <input value={price} name="price" type="text" onChange={e => setPrice(e.target.value)}></input>
         </div>
         <div>
           <label>Picture (URL)</label>
-          <input name="picture" type="text"></input>
+          <input value={picture} name="picture" type="text" onChange={e => setPicture(e.target.value)}></input>
         </div>
         <div>
           <input name="Add" type="submit" value="Add"></input>
