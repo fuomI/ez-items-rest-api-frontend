@@ -1,5 +1,5 @@
-// Import React and hooks: useState, useEffect, useRef
-import React, { useState, useEffect, useRef } from 'react';
+// Import React and hooks: useState, useEffect
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
