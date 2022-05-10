@@ -7,8 +7,8 @@ can add, delete, update, and view items. Changes are reflected to the database.
 
 ## Technologies
 
--**Node.js**
--**React**
+- **Node.js**
+- **React**
 
 ## Features
 
