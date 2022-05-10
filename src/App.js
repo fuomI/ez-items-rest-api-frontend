@@ -151,6 +151,14 @@ function App() {
       </div>
       <div>
           <h2>Instructions</h2>
+          <h3>Adding item:</h3>
+          <p>The user can add item using the add item form at the top of the page.</p>
+          <h3>Deleting item:</h3>
+          <p>The user can delete an item simply by clicking the red "Delete" -button attached to a item.</p>
+          <h3>Updating item:</h3>
+          <p>The user can update item by filling out "Update item" -form and then clicking "Update" -button attached to the item.</p>
+          <h3>! WARNING !</h3>
+          <p>All the changes are permanent and affect the database.</p>
       </div>
     </div>
   )
