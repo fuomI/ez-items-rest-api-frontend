@@ -118,10 +118,6 @@ function App() {
         </form>
       </div>
       <div>
-        <h2>Help</h2>
-        <input type="text" placeholder="Search help..."></input>
-      </div>
-      <div>
         <h2>Items</h2>
         <form>
           <h3>Update Item</h3>
